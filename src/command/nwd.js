@@ -1,7 +1,7 @@
 import os from 'node:os';
 import fs from 'fs/promises';
 import path from 'path';
-import { Printer } from '../printer.js';
+import { Printer } from '../shared/printer.js';
 
 export class Navigation {
     _currentDir = os.homedir();

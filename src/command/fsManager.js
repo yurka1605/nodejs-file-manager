@@ -1,6 +1,6 @@
 import path from 'path';
 import { createReadStream, createWriteStream } from 'fs';
-import { Printer } from '../printer.js';
+import { Printer } from '../shared/printer.js';
 import { rename, unlink, open } from 'fs/promises';
 import { pipeline } from 'stream/promises';
 

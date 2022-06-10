@@ -1,5 +1,5 @@
 import os from 'os';
-import { Printer } from '../printer.js';
+import { Printer } from '../shared/printer.js';
 
 export class OperatingSystem {
     static operations = {

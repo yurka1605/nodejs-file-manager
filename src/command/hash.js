@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs/promises';
 import path from 'path';
-import { Printer } from '../printer.js';
+import { Printer } from '../shared/printer.js';
 
 export class Hash {
     static run(command, currentDir) {
