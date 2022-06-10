@@ -38,7 +38,8 @@ export class FileSystemManager {
     }
 
     static async addNewFile([pathToFile], currentDir) {
-        await open(path.resolve(currentDir, pathToFile), 'ax');
+        const fd = await open(path.resolve(currentDir, pathToFile), 'ax');
+        fd.close();
     }
 
     static async renameFile([oldPath, newFileName], currentDir) {
