@@ -1,7 +1,7 @@
 import { createInterface } from 'node:readline';
 import { stdin as input, stdout as output } from 'node:process';
 import os from 'os';
-import { operatorsConfig, errors } from '../constants.js';
+import { operatorsConfig, errors } from '../shared/constants.js';
 import { User } from '../shared/user.js';
 import { Navigation } from './nwd.js';
 import { Printer } from '../shared/printer.js';

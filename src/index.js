@@ -1,6 +1,6 @@
 import { CommandLine } from './command/index.js';
-import { Printer } from './printer.js';
-import { errors } from './constants.js';
+import { Printer } from './shared/printer.js';
+import { errors } from './shared/constants.js';
 
 try {
     new CommandLine();
