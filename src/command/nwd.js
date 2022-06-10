@@ -1,7 +1,7 @@
 import os from 'node:os';
 import fs from 'fs/promises';
 import path from 'path';
-import { list } from './fs/list.js';
+import { Printer } from '../printer.js';
 
 export class Navigation {
     _currentDir = os.homedir();
@@ -19,7 +19,8 @@ export class Navigation {
     }
 
     async ls() {
-        await list(this._currentDir);
+        const files = await fs.readdir(this._currentDir);
+        Printer.printLog(files);
     }
 
     async up() {

@@ -4,15 +4,14 @@ import os from 'os';
 import { operatorsConfig, errors } from '../constants.js';
 import { User } from '../user.js';
 import { Navigation } from './nwd.js';
-import { Printer } from './printer.js';
+import { Printer } from '../printer.js';
 import { Hash } from './hash.js';
 import { Zip } from './zip.js';
 import { OperatingSystem } from './os.js';
+import { FileSystemManager } from './fsManager.js';
  
 export class CommandLine {
-
-    nwd = null;
-    fs = null;
+    fs = FileSystemManager;
     os = OperatingSystem;
     hash = Hash;
     zip = Zip;
@@ -29,7 +28,6 @@ export class CommandLine {
         this._readLine = createInterface({ input, output });
         this._readLine
             .on('line', command => this.cmdController(command.trim()))
-            .on('resume', () => console.log('resume'))
             .on('close', () => {
                 Printer.print(`${os.EOL}Thank you for using File Manager, ${this.user.name}!`);
             });
