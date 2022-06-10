@@ -1,17 +1,24 @@
 import crypto from 'crypto';
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 import { Printer } from '../shared/printer.js';
 
 export class Hash {
-    static run(command, currentDir) {
+    static async run(command, currentDir) {
         const [_, pathToFile] = command.split(' ');
-        this.calculateHash(path.resolve(currentDir, pathToFile));
+        await this.calculateHash(path.resolve(currentDir, pathToFile));
     }
 
-    async calculateHash(path) {
-        const fileBuffer = await fs.readFile(path);
-        const hash = crypto.createHash('SHA256');
-        Printer.printLog(hash.update(fileBuffer).digest('hex'));
+    static async calculateHash(pathToFile) {
+        return new Promise((resolve, reject) => {
+            const hash = crypto.createHash('SHA256');
+            fs.ReadStream(pathToFile)
+                .on('data', data => hash.update(data))
+                .on('end', () => {
+                    Printer.print(hash.digest('hex'));
+                    resolve();
+                })
+                .on('error', reject);
+        });
     }
 }
