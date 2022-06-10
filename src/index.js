@@ -1,5 +1,5 @@
 import { CommandLine } from './command/index.js';
-import { Printer } from './command/printer.js';
+import { Printer } from './printer.js';
 import { errors } from './constants.js';
 
 try {

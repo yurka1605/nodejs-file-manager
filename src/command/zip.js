@@ -2,7 +2,7 @@ import { createBrotliCompress, createBrotliDecompress } from 'zlib';
 import { pipeline } from 'stream/promises';
 import path from 'path';
 import { createReadStream, createWriteStream } from 'fs';
-import { Printer } from './printer.js';
+import { Printer } from '../printer.js';
 
 export class Zip {
     static async run(cmd, dir) {

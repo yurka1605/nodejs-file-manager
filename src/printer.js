@@ -1,5 +1,5 @@
-import { consoleColors } from '../constants.js';
-import { colorize } from '../utils.js';
+import { consoleColors } from './constants.js';
+import { colorize } from './utils.js';
 
 export class Printer {
     static printError(errorMessage) {
