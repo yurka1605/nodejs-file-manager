@@ -2,7 +2,6 @@ import { createBrotliCompress, createBrotliDecompress } from 'zlib';
 import { pipeline } from 'stream/promises';
 import path from 'path';
 import { createReadStream, createWriteStream } from 'fs';
-import { Printer } from '../shared/printer.js';
 
 export class Zip {
     static async run(cmd, dir) {
@@ -12,11 +11,9 @@ export class Zip {
             path.resolve(dir, pathToSource),
             path.resolve(dir, pathToDestination)
         );
-
-        Printer.print(`File successfully ${operator}ed`);
     }
     
-    async transformFile(transformStream, pathToFile, pathToDestination) {
+    static async transformFile(transformStream, pathToFile, pathToDestination) {
         await pipeline(
             createReadStream(pathToFile),
             transformStream,
