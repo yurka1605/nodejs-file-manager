@@ -8,3 +8,7 @@ export const __dirname = dirname(__filename);
 export const colorize = (message, color) => {
     return color + message + consoleColors.Default;
 }
+
+export const throwManyArgsError = (operator) => {
+    throw new Error(`${operator}: Too many arguments`);
+}

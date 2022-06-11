@@ -1,5 +1,6 @@
 import os from 'os';
 import { Printer } from '../shared/printer.js';
+import { throwManyArgsError } from '../shared/utils.js';
 
 export class OperatingSystem {
     static operations = {
@@ -11,7 +12,11 @@ export class OperatingSystem {
     };
 
     static run(cmd) {
-        const [_, operationName] = cmd.split(' ');
+        const [operator, operationName] = cmd.split(' ');
+
+        if (cmd.split(' ').length > 2) {
+            throwManyArgsError(operator);
+        }
 
         if (this.operations[operationName]) {
             this.operations[operationName]();

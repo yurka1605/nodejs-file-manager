@@ -3,6 +3,7 @@ import { createReadStream, createWriteStream } from 'fs';
 import { Printer } from '../shared/printer.js';
 import { rename, unlink, open } from 'fs/promises';
 import { pipeline } from 'stream/promises';
+import { throwManyArgsError } from '../shared/utils.js';
 
 export class FileSystemManager {
     static operations = {
@@ -16,6 +17,11 @@ export class FileSystemManager {
 
     static async run(cmd, currentDir) {
         const [operator, ...args] = cmd.split(' ');
+        const isOperatorWithOneMaxArgs = operator === 'rm' || operator === 'add' || operator === 'cat';
+        if (args.length > 2 || (args.length > 1 && isOperatorWithOneMaxArgs)) {
+            throwManyArgsError(operator);
+        }
+
         await this.operations[operator](args, currentDir);
     }
 

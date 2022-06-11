@@ -2,6 +2,7 @@ import os from 'node:os';
 import fs from 'fs/promises';
 import path from 'path';
 import { Printer } from '../shared/printer.js';
+import { throwManyArgsError } from '../shared/utils.js';
 
 export class Navigation {
     _currentDir = os.homedir();
@@ -14,8 +15,11 @@ export class Navigation {
     }
 
     async run(command) {
-        const [operator, arg] = command.split(' ');
-        await this[operator](arg);
+        const [operator, ...args] = command.split(' ');
+        if (args.length > 1 || (args.length > 0 && operator !== 'cd')) {
+            throwManyArgsError(operator);
+        }
+        await this[operator](args[0]);
     }
 
     async ls() {
