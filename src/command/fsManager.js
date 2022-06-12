@@ -31,13 +31,8 @@ export class FileSystemManager {
                 path.resolve(currentDir, pathToFile), 
                 { encoding: 'utf8' }
             );
-
-            stream.on('readable', () => {
-                    const data = stream.read();
-                    if (data) {
-                        Printer.print(data);
-                    }
-                })
+            
+            stream.on('data', Printer.print)
                 .on('end', resolve)
                 .on('error', reject);
         });

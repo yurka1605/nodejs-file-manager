@@ -22,10 +22,11 @@ export class CommandLine {
         this.createReadlineInterface();
         Printer.print(`Welcome to the File Manager, ${this.user.name}!`);
         Printer.printInfo(os.EOL + this.nwd.getCurrentPosition());
+        this._readLine.prompt();
     }
 
     createReadlineInterface() {
-        this._readLine = createInterface({ input, output });
+        this._readLine = createInterface({ input, output, prompt: '> ', });
         this._readLine
             .on('line', command => this.cmdController(command.trim()))
             .on('close', () => {
@@ -48,6 +49,7 @@ export class CommandLine {
         }
 
         Printer.printInfo(this.nwd.getCurrentPosition());
+        this._readLine.prompt();
     }
 
     async runOperation(config, command) {
